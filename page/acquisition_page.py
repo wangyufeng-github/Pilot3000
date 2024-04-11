@@ -117,7 +117,6 @@ class Acquisition_page:
             return None
 
 
-
 if __name__ == '__main__':
     window = Acquisition_page()
     print(window.acquisition_page_vascular_degree().ClassName)
