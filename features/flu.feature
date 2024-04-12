@@ -34,13 +34,14 @@ Feature: flu-mode
         And 自动保存序列
         Examples:
             | fps   | fov       | press_time |
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
+            | 4 fps  | 15cm*15cm | 10         |
+            | 4 fps  | 20cm*20cm | 10         |
+            | 8 fps  | 15cm*15cm | 10         |
+            | 8 fps  | 20cm*20cm | 10         |
+            | 15 fps | 15cm*15cm | 10         |
+            | 15 fps | 20cm*20cm | 10         |
+            | 30 fps | 30cm*30cm | 10         |
+
 
     Scenario Outline: 透视高剂量曝光
         Given 打开设置界面
@@ -54,17 +55,21 @@ Feature: flu-mode
         And 自动保存序列
         Examples:
             | fps   | fov       | press_time |
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
-            | 4 fps | 30cm*30cm | 10
+            | 4 fps  | 15cm*15cm | 10         |
+            | 4 fps  | 20cm*20cm | 10         |
+            | 8 fps  | 15cm*15cm | 10         |
+            | 8 fps  | 20cm*20cm | 10         |
+            | 8 fps  | 30cm*30cm | 10         |
+            | 15 fps | 15cm*15cm | 10         |
+            | 15 fps | 20cm*20cm | 10         |
+
 
     Scenario: Roadmap曝光采集
         Given 切换Roadmap采集模式
         When 踩下脚踏
+        Then 曝光开始
+        When 持续<press_time>秒,松开脚踏
+        And 踩下脚踏
         Then 曝光开始
         When 持续<press_time>秒,松开脚踏
         Then 曝光结束
