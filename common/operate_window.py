@@ -25,6 +25,7 @@ class OperateWindow:
         """根据窗口Name属性识别窗口"""
         try:
             window = auto.WindowControl(Name=f"{window_name}")
+            window.SetTopmost()
             # 激活窗口
             window.SetActive(waitTime=0.5)
             # 立即刷新

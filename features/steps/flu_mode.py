@@ -15,8 +15,7 @@ from page.acquisition_page import Acquisition_page
 
 @given(u'启动软件')
 def step_impl(context):
-    context.review_window = Acquisition_page()
-    context.control_window = OperateWindow().recognition_window("运动控制")
+    pass
 
 
 @given(u'开始检查')
@@ -26,6 +25,7 @@ def step_impl(context):
 
 @given(u'选择透视{fps},{fov}')
 def step_impl(context, fps, fov):
+    context.review_window = Acquisition_page()
     # 点击模式下拉框
     context.review_window.acquisition_page_mode_combox().Click(waitTime=0.5)
     # 选择Normal模式
@@ -42,6 +42,7 @@ def step_impl(context, fps, fov):
 
 @when(u'踩下脚踏')
 def step_impl(context):
+    context.control_window = OperateWindow().recognition_window("运动控制")
     # 识别控制软件窗口中脚闸按钮
     footbrake_button = context.control_window.CheckBoxControl(Name="脚闸")
     footbrake_button.Click()
@@ -53,7 +54,8 @@ def step_impl(context):
 
 
 @when(u'持续{press_time}秒,松开脚踏')
-def step_impl(context,press_time):
+def step_impl(context, press_time):
+    context.control_window = OperateWindow().recognition_window("运动控制")
     footbrake_button = context.control_window.CheckBoxControl(Name="脚闸")
     # 踩下脚闸延时
     time.sleep(int(press_time))
