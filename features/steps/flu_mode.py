@@ -26,8 +26,6 @@ def step_impl(context):
 
 @given(u'选择透视{fps},{fov}')
 def step_impl(context, fps, fov):
-    # 激活窗口
-    context.review_window.SetActive(waitTime=0.5)
     # 点击模式下拉框
     context.review_window.acquisition_page_mode_combox().Click(waitTime=0.5)
     # 选择Normal模式
@@ -45,7 +43,6 @@ def step_impl(context, fps, fov):
 @when(u'踩下脚踏')
 def step_impl(context):
     # 识别控制软件窗口中脚闸按钮
-    context.control_window.SetActive(waitTime=0.5)
     footbrake_button = context.control_window.CheckBoxControl(Name="脚闸")
     footbrake_button.Click()
 
@@ -57,7 +54,6 @@ def step_impl(context):
 
 @when(u'持续{press_time}秒,松开脚踏')
 def step_impl(context,press_time):
-    context.control_window.SetActive(waitTime=0.5)
     footbrake_button = context.control_window.CheckBoxControl(Name="脚闸")
     # 踩下脚闸延时
     time.sleep(int(press_time))

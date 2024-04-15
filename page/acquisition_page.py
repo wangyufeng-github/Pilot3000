@@ -16,18 +16,19 @@ class Acquisition_page:
     """
     采集界面控件识别
     """
-    _singleton = None
 
-    def __new__(cls, *args, **kwargs):
-        if cls._singleton is None:
-            cls._singleton = super().__new__(cls, *args, **kwargs)
-        return cls._singleton
+    # _singleton = None
+    #
+    # def __new__(cls, *args, **kwargs):
+    #     if cls._singleton is None:
+    #         cls._singleton = super().__new__(cls, *args, **kwargs)
+    #     return cls._singleton
 
     def __init__(self):
         # 当前打开的窗口中查找复审窗口
         try:
             self.acquisition_windows = auto.WindowControl(Name="复审", Depth=1)
-            # self.acquisition_windows.SetActive(waitTime=0.5)
+            self.acquisition_windows.SetActive(waitTime=0.5)
             self.acquisition_windows.Refind()
         except Exception as e:
             print(f"捕获异常:{e}")
