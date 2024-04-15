@@ -26,6 +26,7 @@ def step_impl(context):
 
 @given(u'选择透视{fps},{fov}')
 def step_impl(context, fps, fov):
+    # 激活窗口
     context.review_window.SetActive(waitTime=0.5)
     # 点击模式下拉框
     context.review_window.acquisition_page_mode_combox().Click(waitTime=0.5)
