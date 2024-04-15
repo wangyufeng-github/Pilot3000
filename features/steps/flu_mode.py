@@ -11,7 +11,6 @@ from behave import *
 
 from common.operate_window import OperateWindow
 from page.acquisition_page import Acquisition_page
-from utils.tools import Tools
 
 
 @given(u'启动软件')
@@ -27,7 +26,6 @@ def step_impl(context):
 
 @given(u'选择透视{fps},{fov}')
 def step_impl(context, fps, fov):
-    Tools().activate_window("复审")
     # 点击模式下拉框
     context.review_window.acquisition_page_mode_combox().Click(waitTime=0.5)
     # 选择Normal模式
