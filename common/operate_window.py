@@ -26,7 +26,7 @@ class OperateWindow:
         try:
             window = auto.WindowControl(Name=f"{window_name}")
             # 激活窗口
-            window.SetActive(waitTime=0.5)
+            # window.SetActive(waitTime=0.5)
             # 立即刷新
             window.Refind()
             return window
