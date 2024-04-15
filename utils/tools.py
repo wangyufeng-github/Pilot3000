@@ -5,6 +5,7 @@
 # @Site :
 # @File : tools.py
 # @Software : PyCharm
+import win32con
 import win32gui
 
 
@@ -12,27 +13,13 @@ class Tools(object):
     def __init__(self):
         pass
 
-    def get_window_handle(self, window_name):
-        """
-        获取窗口句柄
-        :param window_name:
-        :return:
-        """
-        hwnd = win32gui.FindWindow(None, window_name)
-        return hwnd
-
-    def set_window_handle(self, window_handle):
-        # 通过句柄将窗口放到最前
-        win32gui.SetForegroundWindow(window_handle)
-
-    def get_all_window_handles(self):
-        # 定义一个列表，用于存储所有窗口句柄
-        window_handles = []
-        # 遍历所有打开的窗口，并将窗口句柄添加到列表中
-        for window in win32gui.EnumWindows(None):
-            window_handles.append(window)
-        # 返回所有窗口句柄
-        return window_handles
+    def activate_window(window_title):
+        hwnd = win32gui.FindWindow(None, window_title)
+        if hwnd:
+            win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)  # 将窗口还原（如果最小化）
+            win32gui.SetForegroundWindow(hwnd)  # 设置窗口为前台窗口（激活窗口）
+        else:
+            print(f"Window with title '{window_title}' not found.")
 
 
 if __name__ == '__main__':
