@@ -27,7 +27,7 @@ class Acquisition_page:
     def __init__(self):
         # 当前打开的窗口中查找复审窗口
         try:
-            self.acquisition_windows = auto.WindowControl(Name="复审", Depth=1)
+            self.acquisition_windows = auto.WindowControl(Name="复审", searchDepth=1)
             # self.acquisition_windows.SetTopmost()
             self.acquisition_windows.SetActive(waitTime=5)
             self.acquisition_windows.Refind()
