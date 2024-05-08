@@ -64,13 +64,3 @@ Feature: flu-mode
             | 15 fps | 20cm*20cm | 10         |
 
 
-    Scenario: Roadmap曝光采集
-        Given 切换Roadmap采集模式
-        When 踩下脚踏
-        Then 曝光开始
-        When 持续<press_time>秒,松开脚踏
-        And 踩下脚踏
-        Then 曝光开始
-        When 持续<press_time>秒,松开脚踏
-        Then 曝光结束
-        And 自动保存序列

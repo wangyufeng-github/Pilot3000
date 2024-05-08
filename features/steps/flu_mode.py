@@ -13,11 +13,6 @@ from common.operate_window import OperateWindow
 from page.acquisition_page import Acquisition_page
 
 
-@given(u'启动软件')
-def step_impl(context):
-    pass
-
-
 @given(u'开始检查')
 def step_impl(context):
     context.review_window = Acquisition_page()
