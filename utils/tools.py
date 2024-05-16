@@ -7,25 +7,22 @@
 # @Software : PyCharm
 import win32con
 import win32gui
+import pygetwindow as gw
 
 
 class Tools(object):
     def __init__(self):
         pass
 
-    def activate_window(window_title):
-        hwnd = win32gui.FindWindow(None, window_title)
-        if hwnd:
-            win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)  # 将窗口还原（如果最小化）
-            win32gui.SetForegroundWindow(hwnd)  # 设置窗口为前台窗口（激活窗口）
-        else:
-            print(f"Window with title '{window_title}' not found.")
+    def get_handle_by_title(self,title):
+        """
+        获取窗口句柄
+        :param title: 窗口标题
+        :return: 窗口句柄
+        """
+        try:
+            window = gw.getWindowsWithTitle(title)[0]
+            return window._hWnd
+        except IndexError:
+            return None
 
-
-if __name__ == '__main__':
-    # 调用函数获取所有窗口句柄
-    window_handles = Tools().get_all_window_handles()
-    # 遍历所有窗口句柄，并打印窗口标题
-    for window_handle in window_handles:
-        window_title = win32gui.GetWindowText(window_handle)
-        print(window_title)

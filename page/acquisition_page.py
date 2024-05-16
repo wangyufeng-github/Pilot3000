@@ -122,6 +122,7 @@ class Acquisition_page:
 
 if __name__ == '__main__':
     window = Acquisition_page()
+    auto.GetCursorPos()
     print(window.acquisition_page_vascular_degree().ClassName)
     print(window.acquisition_page_vascular_degree().Name)
     print(window.acquisition_page_vascular_degree().GetChildren()[2])
