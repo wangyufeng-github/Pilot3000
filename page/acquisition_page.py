@@ -6,8 +6,9 @@
 # @File : acquisition_page.py
 # @Software : PyCharm
 
+import time
 import uiautomation as auto
-
+from utils.tools import Tools
 auto.uiautomation.DEBUG_SEARCH_TIME = True
 auto.uiautomation.SetGlobalSearchTimeout(2)
 
@@ -25,14 +26,18 @@ class Acquisition_page:
         return cls._singleton
 
     def __init__(self):
-        # 当前打开的窗口中查找复审窗口
         try:
-            self.acquisition_windows = auto.WindowControl(Name="复审", searchDepth=1)
-            # self.acquisition_windows.SetTopmost()
-            self.acquisition_windows.SetActive(waitTime=5)
-            self.acquisition_windows.Refind()
+            handle = Tools().get_handle_by_title("复审")
+            auto.SwitchToThisWindow(handle)
+            time.sleep(1)
+            self.acquisition_windows = auto.WindowControl(searchDepth=1, Name="复审")
+            if self.acquisition_windows.Exists(0, 0):
+                self.acquisition_windows.SetFocus()
+                time.sleep(3)
+            else:
+                raise ValueError("未找到窗口 '复审'")
         except Exception as e:
-            print(f"捕获异常:{e}")
+            print(f"初始化窗口时出现错误: {e}")
 
     def acquisition_page_fps_combox(self):
         """采集帧频下拉框"""

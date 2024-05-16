@@ -6,11 +6,12 @@
 # @File : operate_window.py
 # @Software : PyCharm
 
-
+import time
 import uiautomation as auto
 
 auto.uiautomation.DEBUG_SEARCH_TIME = True
 auto.uiautomation.SetGlobalSearchTimeout(1)
+from utils.tools import Tools
 
 
 class OperateWindow:
@@ -21,19 +22,24 @@ class OperateWindow:
     def __init__(self):
         pass
 
-    def recognition_window(self, window_name):
-        """根据窗口Name属性识别窗口"""
-        try:
-            window = auto.WindowControl(Name=f"{window_name}")
-            window.SetTopmost()
-            # 激活窗口
-            # window.SetActive(waitTime=0.5)
-            # 立即刷新
-            window.Refind()
-            return window
-        except LookupError as e:
-            print(f"{e}:{window_name} window id not found")
-            return None
+    def find_window_by_title(self, title):
+        """
+        根据窗口标题查找窗口并返回窗口控件对象
+        :param title: 窗口标题
+        :return: 窗口控件对象
+        """
+        handle = Tools().get_handle_by_title(title)
+        auto.SwitchToThisWindow(handle)
+        time.sleep(1)  # 确保窗口切换完成
+
+        epp_window = auto.WindowControl(searchDepth=1, Name=title)
+        if epp_window.Exists(0, 0):
+            print(f"找到 '{title}' 窗口")
+            epp_window.SetFocus()
+            time.sleep(5)  # 添加延迟等待控件加载
+            return epp_window
+        else:
+            raise ValueError(f"未找到窗口 '{title}'")
 
     def get_value_pattern(self, window):
         """

@@ -16,7 +16,7 @@ from page.acquisition_page import Acquisition_page
 @given(u'开始检查')
 def step_impl(context):
     context.review_window = Acquisition_page()
-    context.control_window = OperateWindow().recognition_window("运动控制")
+    context.control_window = OperateWindow().find_window_by_title("运动控制")
 
 
 @given(u'选择透视{fps},{fov}')

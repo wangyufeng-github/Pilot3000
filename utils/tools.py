@@ -8,6 +8,7 @@
 import win32con
 import win32gui
 import pygetwindow as gw
+import uiautomation as auto
 
 
 class Tools(object):
@@ -15,16 +16,13 @@ class Tools(object):
         pass
 
     def get_handle_by_title(self,title):
-        """
-        获取窗口句柄
-        :param title: 窗口标题
-        :return: 窗口句柄
-        """
-        try:
-            window = gw.getWindowsWithTitle(title)[0]
-            return window._hWnd
-        except IndexError:
-            return None
+        # 用于根据窗口标题获取窗口句柄的函数
+        window = auto.WindowControl(searchDepth=1, Name=title)
+        if window.Exists(0, 0):
+            return window.NativeWindowHandle
+        else:
+            raise ValueError(f"窗口 '{title}' 未找到")
+
 
 if __name__ == '__main__':
     pass
