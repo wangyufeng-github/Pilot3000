@@ -26,3 +26,5 @@ class Tools(object):
         except IndexError:
             return None
 
+if __name__ == '__main__':
+    pass
